@@ -10,22 +10,11 @@ function playGame(playerInput){
     } else if (argMoveId == 3){
         return 'nożyce';
     }
-
-    printMessage('Nie znam ruchu o id ' + argMoveId + '.');
-    return 'nieznany ruch';
   }
 
   let randomNumber = Math.floor(Math.random() * 3 + 1);
 
-  console.log('Wylosowana liczba to: ' + randomNumber);
-
-  let argComputerMove  = getMoveName(randomNumber);
-
-// Druga część -- wprowadzenie informacji od gracza
-
-//  let playerInput = prompt('Wybierz swój ruch! 1: kamień, 2: papier, 3: nożyce.');
-
-  console.log('Gracz wpisał: ' + playerInput);
+  let argComputerMove = getMoveName(randomNumber);
 
   let argPlayerMove = getMoveName(playerInput);
 
@@ -37,35 +26,65 @@ function playGame(playerInput){
 
     if( argComputerMove == 'kamień' && argPlayerMove == 'papier'){
       printMessage('Wygrywasz!');
+      return 1;
     } else if (argComputerMove == 'kamień' && argPlayerMove == 'nożyce') {
         printMessage('Przegrywasz ;-p');
+        return -1;
     } else if (argComputerMove == 'kamień' && argPlayerMove == 'kamień') {
         printMessage('Mamy remis!');
     } else if (argComputerMove == 'papier' && argPlayerMove == 'papier') {
         printMessage('Mamy remis!');
     } else if (argComputerMove == 'papier' && argPlayerMove == 'nożyce') {
         printMessage('Wygrywasz!');
+        return 1;
     } else if (argComputerMove == 'papier' && argPlayerMove == 'kamień') {
         printMessage('Przegrywasz ;-p');
+        return -1;
     } else if (argComputerMove == 'nożyce' && argPlayerMove == 'papier') {
         printMessage('Przegrywasz ;-p');
+        return -1;
     } else if (argComputerMove == 'nożyce' && argPlayerMove == 'nożyce') {
         printMessage('Mamy remis!');
     } else if (argComputerMove == 'nożyce' && argPlayerMove == 'kamień') {
         printMessage('Wygrywasz!');
+        return 1;
     } else if (argPlayerMove == 'nieznany ruch') {
         printMessage('Wybierz za pomocą liczby z przedziału 1-3!');
     }
   }
-  displayResults(argComputerMove, argPlayerMove);
-
+// wyrzucenie wynikow z funcji displayresults i playGame
+  let gameResult = displayResults(argComputerMove, argPlayerMove);
+  console.log('result:', gameResult);
+  if(gameResult == 1){
+      return 1;
+  } else if (gameResult == -1) {
+      return -1;
+  } else {
+      return 0;
+  }
 }
+
 document.getElementById('play-rock').addEventListener('click', function(){
   playGame(1);
+/*
+  let but1Result = playGame(1);
+  if(but1Result == 1){
+      return 1;
+  } else if (but1Result == -1) {
+      return -1;
+  } else {
+      return 0;
+  }
+  // próba połączenia wyrzucenia wyniku funcji z nacisnieciem przycisku
+*/
 });
+
+
 document.getElementById('play-paper').addEventListener('click', function(){
   playGame(2);
 });
 document.getElementById('play-scissors').addEventListener('click', function(){
   playGame(3);
 });
+
+// Wyniki wielu gier
