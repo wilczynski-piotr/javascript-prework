@@ -45,7 +45,7 @@
     }
   }
 
-  function getMoveName(argMoveId){
+  const getMoveName = function(argMoveId){
     if(argMoveId == 1){
       return 'kamień';
     } else if (argMoveId == 2){
@@ -55,9 +55,7 @@
     }
   }
 
-  function displayResults(argComputerMove, argPlayerMove){
-
-
+  const displayResults = function(argComputerMove, argPlayerMove){
     printMessage('Wybrałem ' + argComputerMove + ', a Ty ' + argPlayerMove + '.');
     if (argComputerMove == 'kamień' && argPlayerMove == 'papier'){
       printMessage('Wygrywasz!');
